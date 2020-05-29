@@ -48,9 +48,9 @@ async def test_present(hub, ctx, name, resource_group, sku, kind, location):
 
 @pytest.mark.run(after="test_present", before="test_absent")
 @pytest.mark.asyncio
-async def test_changes(hub, ctx, name, resource_group, changed_sku, kind, location):
+async def test_changes(hub, ctx, name, resource_group, sku, changed_sku, kind, location):
     expected = {
-        "changes": {"sku": {"new": "Standard_LRS", "old": "Standard_GRS"}},
+        "changes": {"sku": {"new": changed_sku, "old": sku}},
         "comment": f"Storage account {name} has been created.",
         "name": name,
         "result": True,
